@@ -9,14 +9,26 @@ import androidx.fragment.app.Fragment
 import com.ivan.fooddelivery.R
 import com.ivan.fooddelivery.databinding.FragmentFoodMenuBinding
 import com.ivan.fooddelivery.presentation.food_menu.banner_adapter.BannerAdapter
+import com.ivan.fooddelivery.presentation.food_menu.category_adapter.CategoryAdapter
 import com.ivan.fooddelivery.presentation.models.Banner
-import com.ivan.fooddelivery.presentation.util.OnItemClickListener
+import com.ivan.fooddelivery.presentation.models.Category
 
 
-class FoodMenuFragment : Fragment(), OnItemClickListener<Banner> {
+class FoodMenuFragment : Fragment() {
 
     private lateinit var binding: FragmentFoodMenuBinding
+
     private lateinit var bannerAdapter: BannerAdapter
+    private lateinit var categoryAdapter: CategoryAdapter
+
+    private val onBannerClicked = { banner: Banner ->
+        Toast.makeText(requireContext(), "banner ${banner.id} clicked", Toast.LENGTH_SHORT).show()
+    }
+
+    private val onCategoryClicked = { category: Category ->
+        Toast.makeText(requireContext(), "category ${category.name} clicked", Toast.LENGTH_SHORT)
+            .show()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,19 +48,26 @@ class FoodMenuFragment : Fragment(), OnItemClickListener<Banner> {
         )
 
         initBannerRecyclerView(banners)
-    }
 
-    override fun onItemClicked(item: Banner) {
-        Toast.makeText(requireContext(), "banner ${item.id} clicked", Toast.LENGTH_SHORT).show()
+        val categories = listOf(
+            Category(1, "Пицца"),
+            Category(2, "Комбо"),
+            Category(3, "Десерты"),
+            Category(4, "Напитки"),
+            Category(5, "Завтраки"),
+            Category(6, "Обеды"),
+        )
+
+        initCategoriesRecyclerView(categories)
     }
 
     private fun initBannerRecyclerView(banners: List<Banner>) {
-        println("initBannerRecyclerView")
-        bannerAdapter = BannerAdapter(banners, this)
+        bannerAdapter = BannerAdapter(banners, onBannerClicked)
         binding.recyclerViewBanners.adapter = bannerAdapter
     }
 
-    companion object {
-        fun newInstance() = FoodMenuFragment()
+    private fun initCategoriesRecyclerView(categories: List<Category>) {
+        categoryAdapter = CategoryAdapter(categories, onCategoryClicked)
+        binding.recyclerViewCategories.adapter = categoryAdapter
     }
 }
