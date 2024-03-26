@@ -12,4 +12,6 @@
     <color name="checked_category_text_color">#FD3A69</color>
     <color name="food_title">#222831</color>
     <color name="default_background">#FBFBFB</color>
+    <color name="bottom_navigation_background">#F0F0F0</color>
+    <color name="bottom_navigation_unchecked_item">#7B7B7B</color>
 </resources>
