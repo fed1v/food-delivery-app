@@ -7,11 +7,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.ivan.fooddelivery.R
 import com.ivan.fooddelivery.databinding.ItemCategoryBinding
-import com.ivan.fooddelivery.presentation.models.Category
+import com.ivan.fooddelivery.presentation.models.CategoryPresentation
 
 open class CategoryAdapter(
-    private val categories: List<Category>,
-    private val onCategoryClicked: (Category) -> Unit
+    private val categories: List<CategoryPresentation>,
+    private val onCategoryClicked: (CategoryPresentation) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     var checkedPosition = 0
@@ -33,10 +33,10 @@ open class CategoryAdapter(
 
     inner class CategoryViewHolder(
         private val binding: ItemCategoryBinding,
-        private val onCategoryClicked: (Category) -> Unit,
+        private val onCategoryClicked: (CategoryPresentation) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(category: Category, checkedPosition: Int) {
+        fun bind(category: CategoryPresentation, checkedPosition: Int) {
             binding.textViewCategoryName.text = category.name
 
             binding.cardCategory.setOnClickListener {

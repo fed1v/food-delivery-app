@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ivan.fooddelivery.databinding.ItemFoodBinding
-import com.ivan.fooddelivery.presentation.models.Food
+import com.ivan.fooddelivery.presentation.models.FoodPresentation
 
 class FoodAdapter(
-    private val foodList: List<Food>,
-    private val onFoodClicked: (Food) -> Unit,
-    private val onPriceClicked: (Food) -> Unit
+    private val foodList: List<FoodPresentation>,
+    private val onFoodClicked: (FoodPresentation) -> Unit,
+    private val onPriceClicked: (FoodPresentation) -> Unit
 ) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
@@ -26,11 +26,11 @@ class FoodAdapter(
 
     class FoodViewHolder(
         private val binding: ItemFoodBinding,
-        private val onFoodClicked: (Food) -> Unit,
-        private val onPriceClicked: (Food) -> Unit
+        private val onFoodClicked: (FoodPresentation) -> Unit,
+        private val onPriceClicked: (FoodPresentation) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(food: Food) {
+        fun bind(food: FoodPresentation) {
             binding.imageViewPizza.setImageResource(food.imageResource)
             binding.textViewTitle.text = food.title
             binding.textViewDescription.text = food.description

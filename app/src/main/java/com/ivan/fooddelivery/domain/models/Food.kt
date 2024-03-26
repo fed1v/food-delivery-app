@@ -1,4 +1,4 @@
-package com.ivan.fooddelivery.presentation.models
+package com.ivan.fooddelivery.domain.models
 
 data class Food(
     val id: Int,

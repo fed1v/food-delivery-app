@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ivan.fooddelivery.databinding.ItemBannerBinding
-import com.ivan.fooddelivery.presentation.models.Banner
+import com.ivan.fooddelivery.presentation.models.BannerPresentation
 
 class BannerAdapter(
-    private val banners: List<Banner>,
-    private val onBannerClicked: (Banner) -> Unit
+    private val banners: List<BannerPresentation>,
+    private val onBannerClicked: (BannerPresentation) -> Unit
 ) : RecyclerView.Adapter<BannerAdapter.BannerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
@@ -25,10 +25,10 @@ class BannerAdapter(
 
     class BannerViewHolder(
         private val binding: ItemBannerBinding,
-        private val onBannerClicked: (Banner) -> Unit
+        private val onBannerClicked: (BannerPresentation) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(banner: Banner) {
+        fun bind(banner: BannerPresentation) {
             binding.imageBanner.setImageResource(banner.resource)
 
             binding.cardBanner.setOnClickListener {
