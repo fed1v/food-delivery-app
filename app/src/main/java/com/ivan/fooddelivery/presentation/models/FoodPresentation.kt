@@ -2,8 +2,8 @@ package com.ivan.fooddelivery.presentation.models
 
 data class FoodPresentation(
     val id: Int,
-    val imageResource: Int,
+    val imageLink: String?,
     val title: String,
-    val description: String,
+    val ingredients: String,
     val price: Double
 )

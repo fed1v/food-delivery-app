@@ -60,6 +60,15 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.10.0")
+
+    // GSON
+    implementation("com.squareup.retrofit2:converter-gson:2.10.0")
+
+    // Picasso
+    implementation("com.squareup.picasso:picasso:2.8")
 }
 
 kapt {

@@ -24,9 +24,9 @@ fun Category.toPresentation(): CategoryPresentation {
 fun Food.toPresentation(): FoodPresentation {
     return FoodPresentation(
         id = id,
-        imageResource = imageResource,
+        imageLink = imageLink,
         title = title,
-        description = description,
+        ingredients = ingredients.joinToString(", "),
         price = price
     )
 }

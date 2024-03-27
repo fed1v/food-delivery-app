@@ -3,6 +3,7 @@ package com.ivan.fooddelivery.presentation.food_menu
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ivan.fooddelivery.domain.usecases.banners.GetBannersUseCase
 import com.ivan.fooddelivery.domain.usecases.banners.GetCategoriesUseCase
 import com.ivan.fooddelivery.domain.usecases.banners.GetFoodListUseCase
@@ -12,6 +13,8 @@ import com.ivan.fooddelivery.presentation.models.CityPresentation
 import com.ivan.fooddelivery.presentation.models.FoodPresentation
 import com.ivan.fooddelivery.presentation.toPresentation
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,8 +38,10 @@ class FoodMenuViewModel @Inject constructor(
 
 
     init {
-        _bannersLiveData.value = getBannersUseCase().map { it.toPresentation() }
-        _categoriesLiveData.value = getCategoriesUseCase().map { it.toPresentation() }
-        _foodListLiveData.value = getFoodListUseCase().map { it.toPresentation() }
+        viewModelScope.launch(Dispatchers.IO) {
+            _bannersLiveData.postValue(getBannersUseCase().map { it.toPresentation() })
+            _categoriesLiveData.postValue(getCategoriesUseCase().map { it.toPresentation() })
+            _foodListLiveData.postValue(getFoodListUseCase("a").map { it.toPresentation() })
+        }
     }
 }

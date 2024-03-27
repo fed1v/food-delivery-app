@@ -1,6 +1,7 @@
 package com.ivan.fooddelivery.presentation.food_menu.category_adapter
 
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -60,6 +61,10 @@ open class CategoryAdapter(
                 )
 
                 cardElevation = 0f
+
+                binding.textViewCategoryName.apply {
+                    setTypeface(typeface, Typeface.BOLD)
+                }
 
             } else {
                 foregroundColor = ContextCompat.getColor(

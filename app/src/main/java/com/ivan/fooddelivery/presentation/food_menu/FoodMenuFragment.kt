@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.ivan.fooddelivery.R
@@ -19,6 +20,9 @@ import com.ivan.fooddelivery.presentation.models.BannerPresentation
 import com.ivan.fooddelivery.presentation.models.CategoryPresentation
 import com.ivan.fooddelivery.presentation.models.FoodPresentation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -64,20 +68,25 @@ class FoodMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.bannersLiveData.observe(viewLifecycleOwner) {
-            initBannerRecyclerView(it)
-        }
+        lifecycleScope.launch {
 
-        viewModel.categoriesLiveData.observe(viewLifecycleOwner) {
-            initCategoriesRecyclerView(it)
-        }
+            withContext(Dispatchers.Main){
+                viewModel.bannersLiveData.observe(viewLifecycleOwner) {
+                    initBannerRecyclerView(it)
+                }
 
-        viewModel.foodListLiveData.observe(viewLifecycleOwner) {
-            initFoodRecyclerView(it)
-        }
+                viewModel.categoriesLiveData.observe(viewLifecycleOwner) {
+                    initCategoriesRecyclerView(it)
+                }
 
-        viewModel.citiesLiveData.observe(viewLifecycleOwner) {
-            // TODO
+                viewModel.foodListLiveData.observe(viewLifecycleOwner) {
+                    initFoodRecyclerView(it)
+                }
+
+                viewModel.citiesLiveData.observe(viewLifecycleOwner) {
+                    // TODO
+                }
+            }
         }
     }
 

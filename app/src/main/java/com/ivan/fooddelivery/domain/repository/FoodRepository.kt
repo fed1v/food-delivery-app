@@ -4,7 +4,7 @@ import com.ivan.fooddelivery.domain.models.Food
 
 interface FoodRepository {
 
-    fun getFoodList(): List<Food>
+    suspend fun getFoodList(firstLetter: String): List<Food>
 
-    fun getFoodDetails(id: Int): Food?
+    suspend fun getFoodDetails(id: Int): Food?
 }

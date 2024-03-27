@@ -7,7 +7,7 @@ class GetFoodListUseCase(
     private val foodRepository: FoodRepository
 ) {
 
-    operator fun invoke(): List<Food> {
-        return foodRepository.getFoodList()
+    suspend operator fun invoke(firstLetter: String): List<Food> {
+        return foodRepository.getFoodList(firstLetter)
     }
 }

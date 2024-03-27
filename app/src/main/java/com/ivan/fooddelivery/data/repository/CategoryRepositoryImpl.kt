@@ -1,22 +1,23 @@
 package com.ivan.fooddelivery.data.repository
 
+import com.ivan.fooddelivery.data.remote.FoodApiService
+import com.ivan.fooddelivery.data.remote.toDomainModel
 import com.ivan.fooddelivery.domain.models.Category
 import com.ivan.fooddelivery.domain.repository.CategoryRepository
 
-class CategoryRepositoryImpl : CategoryRepository {
+class CategoryRepositoryImpl(
+    private val api: FoodApiService
+) : CategoryRepository {
 
-    override fun getCategories(): List<Category> {
-        return listOf(
-            Category(1, "Пицца"),
-            Category(2, "Комбо"),
-            Category(3, "Десерты"),
-            Category(4, "Напитки"),
-            Category(5, "Завтраки"),
-            Category(6, "Обеды"),
-        )
+    override suspend fun getCategories(): List<Category> {
+        return api
+            .getCategories()
+            .body()
+            ?.categories
+            ?.map { it.toDomainModel() } ?: listOf()
     }
 
-    override fun getCategoryDetails(id: Int): Category? {
+    override suspend fun getCategoryDetails(id: Int): Category? {
         TODO("Not yet implemented")
     }
 }

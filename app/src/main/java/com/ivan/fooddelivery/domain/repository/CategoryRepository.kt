@@ -4,7 +4,7 @@ import com.ivan.fooddelivery.domain.models.Category
 
 interface CategoryRepository {
 
-    fun getCategories(): List<Category>
+    suspend fun getCategories(): List<Category>
 
-    fun getCategoryDetails(id: Int): Category?
+    suspend fun getCategoryDetails(id: Int): Category?
 }

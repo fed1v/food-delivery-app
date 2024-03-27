@@ -3,8 +3,10 @@ package com.ivan.fooddelivery.presentation.food_menu.food_adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ivan.fooddelivery.R
 import com.ivan.fooddelivery.databinding.ItemFoodBinding
 import com.ivan.fooddelivery.presentation.models.FoodPresentation
+import com.squareup.picasso.Picasso
 
 class FoodAdapter(
     private val foodList: List<FoodPresentation>,
@@ -31,9 +33,16 @@ class FoodAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(food: FoodPresentation) {
-            binding.imageViewPizza.setImageResource(food.imageResource)
+
+            Picasso
+                .get()
+                .load(food.imageLink)
+                .placeholder(R.color.white)
+                .error(R.color.white)
+                .into(binding.imageViewPizza)
+
             binding.textViewTitle.text = food.title
-            binding.textViewDescription.text = food.description
+            binding.textViewDescription.text = food.ingredients
             binding.textViewPrice.text = food.price.toInt().toString()
 
             binding.root.setOnClickListener {
