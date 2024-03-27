@@ -5,5 +5,5 @@ data class FoodPresentation(
     val imageLink: String?,
     val title: String,
     val ingredients: String,
-    val price: Double
+    val price: String
 )

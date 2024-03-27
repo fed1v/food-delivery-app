@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +20,7 @@ import com.ivan.fooddelivery.presentation.food_menu.category_adapter.CategoryAda
 import com.ivan.fooddelivery.presentation.food_menu.food_adapter.FoodAdapter
 import com.ivan.fooddelivery.presentation.models.BannerPresentation
 import com.ivan.fooddelivery.presentation.models.CategoryPresentation
+import com.ivan.fooddelivery.presentation.models.CityPresentation
 import com.ivan.fooddelivery.presentation.models.FoodPresentation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -57,6 +60,10 @@ class FoodMenuFragment : Fragment() {
             .show()
     }
 
+    private lateinit var cities: List<CityPresentation>
+
+    private var city = "Москва"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,26 +75,54 @@ class FoodMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
+        binding.cardCity.setOnClickListener {
+            openCityPicker(cities)
+        }
 
-            withContext(Dispatchers.Main){
+        lifecycleScope.launch {
+            withContext(Dispatchers.Main) {
                 viewModel.bannersLiveData.observe(viewLifecycleOwner) {
                     initBannerRecyclerView(it)
                 }
+            }
 
+            withContext(Dispatchers.Main) {
                 viewModel.categoriesLiveData.observe(viewLifecycleOwner) {
                     initCategoriesRecyclerView(it)
                 }
+            }
 
+            withContext(Dispatchers.Main) {
                 viewModel.foodListLiveData.observe(viewLifecycleOwner) {
                     initFoodRecyclerView(it)
                 }
+            }
 
+            withContext(Dispatchers.Main) {
                 viewModel.citiesLiveData.observe(viewLifecycleOwner) {
-                    // TODO
+                    setCity(it[0].name)
+                    cities = it
                 }
             }
         }
+
+    }
+
+    private fun openCityPicker(cities: List<CityPresentation>) {
+        val cityNames = cities.map { it.name }.toTypedArray()
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Выберите город")
+            .setItems(cityNames) { dialog, index ->
+                setCity(cityNames[index])
+            }
+            .show()
+    }
+
+    private fun setCity(newCity: String) {
+        city = newCity
+        binding.textViewCity.text = city
+        binding.cardCity.isVisible = true
     }
 
     private fun initBannerRecyclerView(banners: List<BannerPresentation>) {

@@ -46,7 +46,7 @@ fun FoodDto.toDomainModel(): Food {
         id = id,
         imageLink = strMealThumb,
         ingredients = ingredients,
-        price = id.toDouble(),
+        price = (id % 500).toDouble(),
         title = strMeal
     )
 }

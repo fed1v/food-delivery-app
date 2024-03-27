@@ -91,7 +91,7 @@ open class CategoryAdapter(
 
         private fun setSelection(adapterPosition: Int) {
             if (adapterPosition == RecyclerView.NO_POSITION || adapterPosition == checkedPosition) {
-                return;
+                return
             }
 
             notifyItemChanged(checkedPosition)

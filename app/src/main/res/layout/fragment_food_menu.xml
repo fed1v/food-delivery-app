@@ -28,9 +28,11 @@
         android:layout_marginTop="24dp"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="invisible"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -46,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#222831"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -79,7 +82,7 @@
         android:id="@+id/recyclerView_banners"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:clipToPadding="false"
         android:orientation="horizontal"
         android:overScrollMode="never"

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ivan.fooddelivery.domain.usecases.banners.GetBannersUseCase
 import com.ivan.fooddelivery.domain.usecases.banners.GetCategoriesUseCase
+import com.ivan.fooddelivery.domain.usecases.banners.GetCitiesUseCase
 import com.ivan.fooddelivery.domain.usecases.banners.GetFoodListUseCase
 import com.ivan.fooddelivery.presentation.models.BannerPresentation
 import com.ivan.fooddelivery.presentation.models.CategoryPresentation
@@ -22,6 +23,7 @@ class FoodMenuViewModel @Inject constructor(
     private val getBannersUseCase: GetBannersUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getFoodListUseCase: GetFoodListUseCase,
+    private val getCitiesUseCase: GetCitiesUseCase
 ) : ViewModel() {
 
     private var _bannersLiveData = MutableLiveData<List<BannerPresentation>>()
@@ -42,6 +44,7 @@ class FoodMenuViewModel @Inject constructor(
             _bannersLiveData.postValue(getBannersUseCase().map { it.toPresentation() })
             _categoriesLiveData.postValue(getCategoriesUseCase().map { it.toPresentation() })
             _foodListLiveData.postValue(getFoodListUseCase("a").map { it.toPresentation() })
+            _citiesLiveData.postValue(getCitiesUseCase().map { it.toPresentation() })
         }
     }
 }

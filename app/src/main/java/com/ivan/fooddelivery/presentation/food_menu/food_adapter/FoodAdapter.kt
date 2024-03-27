@@ -43,7 +43,7 @@ class FoodAdapter(
 
             binding.textViewTitle.text = food.title
             binding.textViewDescription.text = food.ingredients
-            binding.textViewPrice.text = food.price.toInt().toString()
+            binding.textViewPrice.text = food.price
 
             binding.root.setOnClickListener {
                 onFoodClicked(food)

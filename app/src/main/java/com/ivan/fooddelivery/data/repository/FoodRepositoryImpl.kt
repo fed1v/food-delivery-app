@@ -12,14 +12,11 @@ class FoodRepositoryImpl(
     override suspend fun getFoodList(firstLetter: String): List<Food> {
         val response = apiService.getFoodList(firstLetter)
 
-        println("Response: $response")
-        println(response.body())
-
         return response
             .body()
             ?.foodList
             ?.map { it.toDomainModel() }
-            ?: listOf<Food>()
+            ?: listOf()
     }
 
     override suspend fun getFoodDetails(id: Int): Food? {
