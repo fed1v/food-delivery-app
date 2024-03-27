@@ -7,127 +7,133 @@
     android:background="@color/default_background"
     tools:context=".presentation.food_menu.FoodMenuFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_start"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_end"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="invisible"
-        app:cardElevation="0dp"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#FBFBFB"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/textView_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#222831"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Москва" />
-
-            <ImageView
-                android:id="@+id/imageView_city_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:contentDescription="@string/city"
-                android:src="@drawable/icon_city_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_city"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?android:selectableItemBackground"
-        android:contentDescription="@string/qr_code"
-        android:src="@drawable/icon_qr_code"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintTop_toTopOf="@id/card_city" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_banners"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:overScrollMode="never"
-        android:paddingStart="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_city"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_banner" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_categories"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:overScrollMode="never"
-        android:paddingHorizontal="12dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView_banners"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_category" />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/divider"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topPanelLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:dividerColor="#F3F5F9"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView_categories" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_food"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingVertical="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_food" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="invisible"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FBFBFB">
+
+                <TextView
+                    android:id="@+id/textView_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#222831"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Москва" />
+
+                <ImageView
+                    android:id="@+id/imageView_city_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:contentDescription="@string/city"
+                    android:src="@drawable/icon_city_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/textView_city"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/button_qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/qr_code"
+            android:src="@drawable/icon_qr_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/card_city" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topPanelLayout">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:elevation="0dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_banners"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingStart="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_scrollFlags="scroll"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_banner" />
+
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="12dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_collapseMode="pin"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_category" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_food"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_food" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

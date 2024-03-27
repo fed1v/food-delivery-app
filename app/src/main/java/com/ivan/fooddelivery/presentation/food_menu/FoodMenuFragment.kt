@@ -11,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.ivan.fooddelivery.R
 import com.ivan.fooddelivery.databinding.FragmentFoodMenuBinding
@@ -51,8 +50,6 @@ class FoodMenuFragment : Fragment() {
     private val onFoodClicked = { food: FoodPresentation ->
         Toast.makeText(requireContext(), "food ${food.title} clicked", Toast.LENGTH_SHORT)
             .show()
-
-        findNavController().navigate(R.id.action_menuFragment_to_foodDetailsFragment)
     }
 
     private val onFoodPriceClicked = { food: FoodPresentation ->
@@ -77,6 +74,10 @@ class FoodMenuFragment : Fragment() {
 
         binding.cardCity.setOnClickListener {
             openCityPicker(cities)
+        }
+
+        binding.buttonQrCode.setOnClickListener {
+            Toast.makeText(requireContext(), "Scan QR code", Toast.LENGTH_SHORT).show()
         }
 
         lifecycleScope.launch {

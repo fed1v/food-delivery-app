@@ -9,14 +9,5 @@
         android:id="@+id/menuFragment"
         android:name="com.ivan.fooddelivery.presentation.food_menu.FoodMenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_food_menu" >
-        <action
-            android:id="@+id/action_menuFragment_to_foodDetailsFragment"
-            app:destination="@id/foodDetailsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/foodDetailsFragment"
-        android:name="com.ivan.fooddelivery.presentation.food_details.FoodDetailsFragment"
-        android:label="fragment_food_details"
-        tools:layout="@layout/fragment_food_details" />
+        tools:layout="@layout/fragment_food_menu" />
 </navigation>
