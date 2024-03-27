@@ -1,5 +1,10 @@
 package com.ivan.fooddelivery.data.di
 
+import android.content.Context
+import androidx.room.Room
+import com.ivan.fooddelivery.data.database.AppDatabase
+import com.ivan.fooddelivery.data.database.dao.CategoryDao
+import com.ivan.fooddelivery.data.database.dao.FoodDao
 import com.ivan.fooddelivery.data.remote.FoodApiService
 import com.ivan.fooddelivery.data.repository.BannerRepositoryImpl
 import com.ivan.fooddelivery.data.repository.CategoryRepositoryImpl
@@ -12,6 +17,7 @@ import com.ivan.fooddelivery.domain.repository.FoodRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,6 +39,32 @@ class DataModule {
 
     @Provides
     @Singleton
+    fun provideDatabase(
+        @ApplicationContext context: Context
+    ): AppDatabase {
+        return Room
+            .databaseBuilder(context, AppDatabase::class.java, "database.db")
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryDao(
+        database: AppDatabase
+    ): CategoryDao {
+        return database.categoryDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFoodDao(
+        database: AppDatabase
+    ): FoodDao {
+        return database.foodDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideFoodApiService(retrofit: Retrofit): FoodApiService {
         return retrofit.create(FoodApiService::class.java)
     }
@@ -45,14 +77,17 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideFoodRepository(apiService: FoodApiService): FoodRepository {
-        return FoodRepositoryImpl(apiService)
+    fun provideFoodRepository(apiService: FoodApiService, foodDao: FoodDao): FoodRepository {
+        return FoodRepositoryImpl(apiService, foodDao)
     }
 
     @Provides
     @Singleton
-    fun provideCategoryRepository(apiService: FoodApiService): CategoryRepository {
-        return CategoryRepositoryImpl(apiService)
+    fun provideCategoryRepository(
+        apiService: FoodApiService,
+        categoryDao: CategoryDao
+    ): CategoryRepository {
+        return CategoryRepositoryImpl(apiService, categoryDao)
     }
 
     @Provides

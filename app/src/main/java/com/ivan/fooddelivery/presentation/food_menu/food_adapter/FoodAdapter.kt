@@ -3,10 +3,11 @@ package com.ivan.fooddelivery.presentation.food_menu.food_adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ivan.fooddelivery.R
 import com.ivan.fooddelivery.databinding.ItemFoodBinding
 import com.ivan.fooddelivery.presentation.models.FoodPresentation
-import com.squareup.picasso.Picasso
 
 class FoodAdapter(
     private val foodList: List<FoodPresentation>,
@@ -34,9 +35,10 @@ class FoodAdapter(
 
         fun bind(food: FoodPresentation) {
 
-            Picasso
-                .get()
+            Glide
+                .with(binding.root.context)
                 .load(food.imageLink)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .placeholder(R.color.white)
                 .error(R.color.white)
                 .into(binding.imageViewPizza)

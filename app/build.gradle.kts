@@ -17,6 +17,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {arg("room.schemaLocation", "$projectDir/schemas")}
+        }
     }
 
     buildFeatures {
@@ -67,8 +71,13 @@ dependencies {
     // GSON
     implementation("com.squareup.retrofit2:converter-gson:2.10.0")
 
-    // Picasso
-    implementation("com.squareup.picasso:picasso:2.8")
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
 }
 
 kapt {

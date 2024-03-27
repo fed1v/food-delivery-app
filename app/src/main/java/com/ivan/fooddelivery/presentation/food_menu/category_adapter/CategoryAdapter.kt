@@ -78,6 +78,10 @@ open class CategoryAdapter(
                 )
 
                 cardElevation = binding.root.resources.getDimension(R.dimen.default_card_elevation)
+
+                binding.textViewCategoryName.apply {
+                    setTypeface(null, Typeface.NORMAL)
+                }
             }
 
 
