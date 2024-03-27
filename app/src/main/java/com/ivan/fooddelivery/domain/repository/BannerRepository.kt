@@ -4,7 +4,7 @@ import com.ivan.fooddelivery.domain.models.Banner
 
 interface BannerRepository {
 
-    fun getBanners(): List<Banner>
+    suspend fun getBanners(): List<Banner>
 
-    fun getBannerDetails(id: Int): Banner?
+    suspend fun getBannerDetails(id: Int): Banner?
 }

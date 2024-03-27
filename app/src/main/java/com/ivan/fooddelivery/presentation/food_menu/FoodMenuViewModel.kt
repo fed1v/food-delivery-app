@@ -43,10 +43,7 @@ class FoodMenuViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             _bannersLiveData.postValue(getBannersUseCase().map { it.toPresentation() })
             _categoriesLiveData.postValue(getCategoriesUseCase().map { it.toPresentation() })
-
-            val foodB = getFoodListUseCase("b").map { it.toPresentation() }
-            _foodListLiveData.postValue(foodB)
-
+            _foodListLiveData.postValue(getFoodListUseCase("b").map { it.toPresentation() })
             _citiesLiveData.postValue(getCitiesUseCase().map { it.toPresentation() })
         }
     }

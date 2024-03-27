@@ -6,11 +6,11 @@ import com.ivan.fooddelivery.domain.repository.BannerRepository
 
 class BannerRepositoryImpl : BannerRepository {
 
-    override fun getBanners(): List<Banner> {
-        return BannerProvider.banners;
+    override suspend fun getBanners(): List<Banner> {
+        return BannerProvider.banners
     }
 
-    override fun getBannerDetails(id: Int): Banner? {
+    override suspend fun getBannerDetails(id: Int): Banner? {
         return BannerProvider.banners.firstOrNull { it.id == id }
     }
 }

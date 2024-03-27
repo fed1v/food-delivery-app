@@ -7,7 +7,7 @@ class GetBannersUseCase(
     private val bannerRepository: BannerRepository
 ) {
 
-    operator fun invoke(): List<Banner> {
+    suspend operator fun invoke(): List<Banner> {
         return bannerRepository.getBanners()
     }
 }
